@@ -9,11 +9,11 @@
 
 ## 📋 Version Information
 
-- **Base Image**: `rocm/pytorch:rocm6.4.1_ubuntu24.04_py3.12_pytorch_release_2.6.0`
-- **Python**: 3.12.10
-- **PyTorch**: 2.6.0+git684f6f2
-- **ROCm**: 6.4.43483-a187df25c
-- **ComfyUI**: v0.3.43 (e18f53c, 2025-06-27)
+**Base Image**: `rocm/pytorch:rocm7.1.1_ubuntu24.04_py3.12_pytorch_release_2.9.1`
+**Python**: 3.12.x
+**PyTorch**: 2.9.1
+**ROCm**: 7.1.1
+**ComfyUI**: v0.3.76 (30c259c, 2025-12-02)
 
 ## ✨ Key Features
 
@@ -23,7 +23,6 @@
 - 🧪 **Tested compatibility** - All dependencies verified on real AMD hardware
 - 🎯 **Ready to use** - Pre-configured with sample workflows
 - 💾 **Persistent storage** - Models and outputs preserved across restarts
-
 
 ## 🚀 Quick Start
 
@@ -39,7 +38,7 @@ docker run -d \
   corundex/comfyui-rocm:latest
 ```
 
-Access ComfyUI at: **http://localhost:8188**
+Access ComfyUI at: [http://localhost:8188](http://localhost:8188)
 
 ## 📋 Requirements
 
@@ -54,6 +53,7 @@ Access ComfyUI at: **http://localhost:8188**
 ## 🔧 Setup Instructions
 
 ### 1. Install ROCm Drivers
+
 ```bash
 # Ubuntu/Debian
 curl -fsSL https://repo.radeon.com/rocm/rocm.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/rocm.gpg
@@ -63,11 +63,13 @@ sudo usermod -a -G render,video $USER
 ```
 
 ### 2. Verify ROCm Installation
+
 ```bash
 rocm-smi  # Should show your AMD GPU(s)
 ```
 
 ### 3. Run ComfyUI
+
 ```bash
 docker run -d \
   --name comfyui-rocm \
@@ -145,15 +147,18 @@ Run with: `docker compose up -d`
 ## ⚡ Performance & Hardware
 
 ### Tested Hardware
+
 - **AMD Radeon RX 9060 XT** (16GB VRAM) ✅
 
 ### Performance Metrics
+
 - **Generation Time**: ~30-60s for 512x512 images
 - **VRAM Usage**: 4-8GB for basic operations  
 - **Model Loading**: ~30-60s first time, cached afterward
 - **Batch Processing**: Multiple images supported
 
 ### Tips
+
 - Mount persistent volumes to avoid re-downloading models
 - Start with `default` models, upgrade to larger sets as needed
 - Use fast SSD storage for optimal performance
@@ -173,12 +178,15 @@ Run with: `docker compose up -d`
 This project is licensed under GPL-3.0. See the [LICENSE](LICENSE) file for details.
 
 ### Third-Party Components
+
 - **ComfyUI**: GPL-3.0 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)
 - **PyTorch**: BSD 3-Clause - [PyTorch](https://pytorch.org/)
 - **ROCm**: Various OSS licenses - [AMD ROCm](https://rocm.docs.amd.com/)
 
 **Acknowledgments:**
+
 - [ComfyUI](https://github.com/comfyanonymous/ComfyUI) - Node-based AI workflow interface
+
 - [AMD ROCm](https://rocm.docs.amd.com/) - Open source GPU computing platform  
 - ROCm community for AMD GPU AI support
 

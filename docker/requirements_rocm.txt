@@ -1,41 +1,37 @@
 # ROCm-compatible requirements.txt for ComfyUI
 # Generated on Fri Jun 27 23:19:36 EDT 2025
-# Base image: rocm/pytorch:latest
+# Base image: rocm/pytorch:rocm7.1.1_ubuntu24.04_py3.12_pytorch_release_2.9.1
 # Each package tested in fresh ROCm container with 300s timeout
 #
 # Version Information:
-# - Python: 3.12.10
-# - PyTorch: 2.6.0+git684f6f2
-# - ROCm: 6.4.43483-a187df25c
-# - ComfyUI: e18f53c (2025-06-27)
-# - ComfyUI Tag: v0.3.43
-# - ComfyUI Version: 0.3.43
+# - Python: 3.12.x
+# - PyTorch: 2.9.1
+# - ROCm: 7.1.1
+# - ComfyUI: 30c259c (2025-12-02)
+# - ComfyUI Tag: v0.3.76
+# - ComfyUI Version: 0.3.76
 # 
-# Legend:
-#   ✅ SAFE - can be installed without breaking ROCm
-#   ❌ BROKEN - breaks ROCm, fails to install, or times out
-#   📦 ALREADY - already installed correctly in base image
 
-comfyui-frontend-package==1.23.4
-comfyui-workflow-templates==0.1.30
-comfyui-embedded-docs==0.2.3
-# 📦 ALREADY: torch
+comfyui-frontend-package==1.32.10
+comfyui-workflow-templates==0.7.25
+comfyui-embedded-docs==0.3.1
+torch
 torchsde
-# 📦 ALREADY: torchvision
-# 🌙 NIGHTLY: torchaudio (use: pip install --pre torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.4)
-# 📦 ALREADY: numpy>=1.25.0
+torchvision
+# 🌙 NIGHTLY: torchaudio (use: pip install --pre torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm7.1)
+numpy>=1.25.0
 einops
-transformers>=4.37.2
+transformers>=4.50.3
 tokenizers>=0.13.3
 sentencepiece
 safetensors>=0.4.2
-# 📦 ALREADY: aiohttp>=3.11.8
-# 📦 ALREADY: yarl>=1.18.0
+aiohttp>=3.11.8
+yarl>=1.18.0
 pyyaml
 Pillow
-# 📦 ALREADY: scipy
-# 📦 ALREADY: tqdm
-# 📦 ALREADY: psutil
+scipy
+tqdm
+psutil
 alembic
 SQLAlchemy
 kornia>=0.7.1
@@ -44,10 +40,3 @@ spandrel
 av>=14.2.0
 pydantic~=2.0
 pydantic-settings~=2.0
-
-# Testing Summary:
-# ✅ SAFE packages: 18
-# 📦 ALREADY installed: 9
-# 🌙 NIGHTLY packages: 1
-# ❌ BROKEN packages: 0
-# Total tested: 28

@@ -1,7 +1,7 @@
 # ROCm ComfyUI Dockerfile
 # Based on AMD's official ROCm PyTorch container
 
-FROM rocm/pytorch:rocm6.4.1_ubuntu24.04_py3.12_pytorch_release_2.6.0
+FROM rocm/pytorch:rocm7.1.1_ubuntu24.04_py3.12_pytorch_release_2.9.1
 
 # Set working directory
 WORKDIR /workspace
@@ -14,8 +14,11 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
-# Clone ComfyUI
-RUN git clone https://github.com/comfyanonymous/ComfyUI.git
+
+# Clone ComfyUI and checkout pinned version
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git \
+  && cd ComfyUI \
+  && git checkout v0.3.76
 
 # Set ComfyUI as working directory
 WORKDIR /workspace/ComfyUI
@@ -54,7 +57,7 @@ RUN chmod +x /workspace/startup.sh
 #   "realistic" - Download realistic photo models  
 #   "none"      - Skip all downloads, use existing models only
 #   Custom      - Any section name from models.conf
-ENV MODEL_DOWNLOAD=default
+ENV MODEL_DOWNLOAD=none
 
 # Expose ComfyUI port
 EXPOSE 8188
