@@ -52,6 +52,12 @@ SQLAlchemy
 pydantic~=2.0
 pydantic-settings~=2.0
 
+comfy-aimdo>=0.2.12
+comfy-kitchen>=0.2.8
+simpleeval>=1.0.0
+blake3
+filelock
+
 # Image / video / audio
 kornia>=0.7.1
 spandrel
