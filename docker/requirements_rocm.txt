@@ -1,53 +1,70 @@
 # ROCm-compatible requirements.txt for ComfyUI
-# Generated on Fri Jun 27 23:19:36 EDT 2025
-# Base image: rocm/pytorch:latest
-# Each package tested in fresh ROCm container with 300s timeout
+# Base image: rocm/pytorch:rocm7.2.2_ubuntu24.04_py3.12_pytorch_release_2.10.0
 #
 # Version Information:
-# - Python: 3.12.10
-# - PyTorch: 2.6.0+git684f6f2
-# - ROCm: 6.4.43483-a187df25c
-# - ComfyUI: e18f53c (2025-06-27)
-# - ComfyUI Tag: v0.3.43
-# - ComfyUI Version: 0.3.43
-# 
-# Legend:
-#   ✅ SAFE - can be installed without breaking ROCm
-#   ❌ BROKEN - breaks ROCm, fails to install, or times out
-#   📦 ALREADY - already installed correctly in base image
+# - Python: 3.12.x
+# - PyTorch: 2.10.0
+# - ROCm: 7.2.2
+# - ComfyUI: v0.19.3
+#
+# Notes:
+# - torch/torchvision ship in the base image; listed here to ensure pip resolves
+#   any ComfyUI version constraint against the already-installed ROCm builds
+# - torchaudio ships pre-built in the base image (2.10.0+rocm7.2.2);
+#   the 'torchaudio' entry in requirements.txt is satisfied immediately by pip
+# - onnxruntime_migraphx is installed separately in the Dockerfile (wheel URL);
+#   it provides the 'onnxruntime' Python namespace as a drop-in replacement for
+#   onnxruntime_rocm (AMD renamed the package starting with ROCm 7.x)
 
-comfyui-frontend-package==1.23.4
-comfyui-workflow-templates==0.1.30
-comfyui-embedded-docs==0.2.3
-# 📦 ALREADY: torch
+# ComfyUI frontend packages
+comfyui-frontend-package==1.43.1
+comfyui-workflow-templates==0.9.59
+comfyui-embedded-docs==0.4.3
+
+# PyTorch ecosystem (already in base image — listed to satisfy pip resolver)
+torch
+torchvision
 torchsde
-# 📦 ALREADY: torchvision
-# 🌙 NIGHTLY: torchaudio (use: pip install --pre torchaudio --index-url https://download.pytorch.org/whl/nightly/rocm6.4)
-# 📦 ALREADY: numpy>=1.25.0
+
+# Core ML
+numpy>=1.25.0
 einops
-transformers>=4.37.2
-tokenizers>=0.13.3
+transformers==5.6.1
+tokenizers==0.22.2
 sentencepiece
 safetensors>=0.4.2
-# 📦 ALREADY: aiohttp>=3.11.8
-# 📦 ALREADY: yarl>=1.18.0
+accelerate
+peft
+
+# Web / async
+aiohttp>=3.11.8
+yarl>=1.18.0
+requests
+
+# Data / serialization
 pyyaml
 Pillow
-# 📦 ALREADY: scipy
-# 📦 ALREADY: tqdm
-# 📦 ALREADY: psutil
+scipy
+tqdm
+psutil
 alembic
 SQLAlchemy
-kornia>=0.7.1
-spandrel
-# 📦 ALREADY: soundfile
-av>=14.2.0
 pydantic~=2.0
 pydantic-settings~=2.0
 
-# Testing Summary:
-# ✅ SAFE packages: 18
-# 📦 ALREADY installed: 9
-# 🌙 NIGHTLY packages: 1
-# ❌ BROKEN packages: 0
-# Total tested: 28
+comfy-aimdo>=0.2.12
+comfy-kitchen>=0.2.8
+simpleeval>=1.0.0
+blake3
+filelock
+
+# Image / video / audio
+kornia>=0.7.1
+spandrel
+opencv-python
+imageio
+imageio-ffmpeg
+ffmpeg-python
+piexif
+av>=14.2.0
+soundfile
